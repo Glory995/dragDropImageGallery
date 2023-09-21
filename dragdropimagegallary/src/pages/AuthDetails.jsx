@@ -182,21 +182,24 @@ const AuthDetails = () => {
                     }}
                     className="holder"
                   >
+                    
                     {filteredImages.map((image, index) => (
-                      <Draggable key={image.id} draggableId={image.id} index={index}>
-                        {(provided, snapshot) => (
-                          <div
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            className={`image-box ${image.isDragging ? "dragging" : ""}`}
-                          >
-                            <img src={image.src} alt={`Image ${index + 1}`} />
-                            <h4>{image.tags[0]}</h4>
-                          </div>
-                        )}
-                      </Draggable>
-                    ))}
+  <Draggable key={image.id} draggableId={image.id} index={index}>
+    {(provided, snapshot) => (
+      <div
+        ref={provided.innerRef}
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}
+        className={`image-box ${image.isDragging ? "dragging" : ""}`}
+      >
+        <img src={image.src} alt={`Image ${index + 1}`} />
+        {/* Display the first tag name */}
+        <p>Tag: {image.tags[0]}</p>
+      </div>
+    )}
+  </Draggable>
+))}
+
                     {provided.placeholder}
                   </div>
                 )}
