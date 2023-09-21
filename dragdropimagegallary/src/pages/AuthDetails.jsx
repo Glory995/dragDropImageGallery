@@ -192,6 +192,7 @@ const AuthDetails = () => {
                             className={`image-box ${image.isDragging ? "dragging" : ""}`}
                           >
                             <img src={image.src} alt={`Image ${index + 1}`} />
+                            <h4>{image.tags[0]}</h4>
                           </div>
                         )}
                       </Draggable>
