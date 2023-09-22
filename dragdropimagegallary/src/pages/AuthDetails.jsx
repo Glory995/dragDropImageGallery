@@ -83,23 +83,27 @@ const AuthDetails = () => {
     setImages(updatedImages);
   };
 
-  const handleDrop = (e) => {
-    e.preventDefault();
+const handleDrop = (e) => {
+  e.preventDefault();
 
-    const droppedFiles = Array.from(e.dataTransfer.files);
-    const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
+  const droppedFiles = Array.from(e.dataTransfer.files);
+  const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
 
-    const newImages = droppedFiles
-      .filter((file) => validImageTypes.includes(file.type))
-      .map((file) => ({
+  const newImages = droppedFiles
+    .filter((file) => validImageTypes.includes(file.type))
+    .map((file) => {
+      const tags = promptForTags(); // Prompt user for tags
+      return {
         id: String(Math.random()),
         src: URL.createObjectURL(file),
         isDragging: false,
-        tags: [], // Initialize tags as empty array for dropped images
-      }));
+        tags: tags,
+      };
+    });
 
-    setImages((prevImages) => [...prevImages, ...newImages]);
-  };
+  setImages((prevImages) => [...prevImages, ...newImages]);
+};
+
 
   const handleDragOver = (e) => {
     e.preventDefault();
@@ -119,6 +123,13 @@ const AuthDetails = () => {
       setImages((prevImages) => [...prevImages, newImage]);
     }
   };
+
+
+  const promptForTags = (defaultTags = []) => {
+  const tagInput = window.prompt("Enter tags separated by commas (e.g., tag1, tag2)", defaultTags.join(', '));
+  return tagInput ? tagInput.split(',').map(tag => tag.trim()) : [];
+};
+
 
   return (
     <div>
