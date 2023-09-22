@@ -92,7 +92,7 @@ const handleDrop = (e) => {
   const newImages = droppedFiles
     .filter((file) => validImageTypes.includes(file.type))
     .map((file) => {
-      const tags = promptForTags(); // Prompt user for tags
+      const tags = handleTagInput(); // Prompt user for tags
       return {
         id: String(Math.random()),
         src: URL.createObjectURL(file),
@@ -105,30 +105,40 @@ const handleDrop = (e) => {
 };
 
 
+
   const handleDragOver = (e) => {
     e.preventDefault();
   };
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
+const handleImageUpload = (e) => {
+  const file = e.target.files[0];
 
-    if (file) {
-      const newImage = {
-        id: String(Math.random()),
-        src: URL.createObjectURL(file),
-        isDragging: false,
-        tags: [], // Initialize tags as empty array for uploaded images
-      };
+  if (file) {
+    const tags = handleTagInput(); // Prompt user for tags
+    const newImage = {
+      id: String(Math.random()),
+      src: URL.createObjectURL(file),
+      isDragging: false,
+      tags: tags,
+    };
 
-      setImages((prevImages) => [...prevImages, newImage]);
-    }
-  };
+    setImages((prevImages) => [...prevImages, newImage]);
+  }
+};
+
 
 
   const promptForTags = (defaultTags = []) => {
   const tagInput = window.prompt("Enter tags separated by commas (e.g., tag1, tag2)", defaultTags.join(', '));
   return tagInput ? tagInput.split(',').map(tag => tag.trim()) : [];
 };
+
+
+const handleTagInput = (defaultTags = []) => {
+  const tagInput = window.prompt("Enter tags separated by commas (e.g., tag1, tag2)", defaultTags.join(', '));
+  return tagInput ? tagInput.split(',').map(tag => tag.trim()) : [];
+};
+
 
 
   return (
