@@ -43,8 +43,8 @@ const AuthDetails = () => {
   };
 
   const initialImages = [
-    { id: '1', src: first, isDragging: false, tags: ["Data Science", "Technology"] },
-    { id: '2', src: secon, isDragging: false, tags: ["Digital Marketing", "Marketing"] },
+    { id: '1', src: first, isDragging: false, tags: ["Data", "Technology"] },
+    { id: '2', src: secon, isDragging: false, tags: ["Digital", "Marketing"] },
     { id: '3', src: third, isDragging: false, tags: ["Graphics", "Design"] },
     { id: '4', src: fourt, isDragging: false, tags: ["IEEE", "Technology"] },
   ];
