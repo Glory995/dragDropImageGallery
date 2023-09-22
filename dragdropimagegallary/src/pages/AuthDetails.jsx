@@ -61,13 +61,16 @@ const AuthDetails = () => {
   useEffect(() => {
     // Filter images based on search query
     if (searchQuery) {
-      const filtered = images.filter((image) => image.tags.includes(searchQuery));
+      const filtered = images.filter((image) =>
+        image.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+      );
       setFilteredImages(filtered);
     } else {
       // If search query is empty, display all images
       setFilteredImages(images);
     }
   }, [searchQuery, images]);
+  
 
   const onDragEnd = (result) => {
     if (!result.destination) return;
