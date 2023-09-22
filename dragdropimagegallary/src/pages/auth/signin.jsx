@@ -71,9 +71,9 @@ const Authentication = () => {
           </div>
         )}
       </form>
-      <p onClick={toggleMode}>
+      {/* <p onClick={toggleMode}>
         {isSignUp ? "Already have an account? Log In" : "Don't have an account? Sign Up"}
-      </p>
+      </p> */}
     </div>
   );
 };
